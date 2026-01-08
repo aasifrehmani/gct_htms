@@ -39,8 +39,8 @@ def add_room():
 
         db.session.add(room)
         db.session.commit()
-        #updated the redirection
-        #updating again from local
+        #updated the redirection 
+        #updated on github
         return redirect(url_for('home'))
 
     return render_template('add_room.html')
