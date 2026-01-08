@@ -40,6 +40,7 @@ def add_room():
         db.session.add(room)
         db.session.commit()
         #updated the redirection
+        #updating again from local
         return redirect(url_for('home'))
 
     return render_template('add_room.html')
