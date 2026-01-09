@@ -2,11 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for
 from models import db, Room, Guest, Booking
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///hotel.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/hotel.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
-
+@app.before_first_request
+def init_db():
+    db.create_all()
 
 
 # ---------- ROOMS ----------
@@ -155,8 +157,9 @@ def delete_booking(id):
 
 
 
-
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True, host='0.0.0.0', port=5000)
+# This code is comented out becaouse of 
+# Deployement on azure.
+# if __name__ == '__main__':
+#     with app.app_context():
+#         db.create_all()
+#     app.run(debug=True, host='0.0.0.0', port=5000)
